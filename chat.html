@@ -1,44 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;900&display=swap" rel="stylesheet">
-    <title>DocDialogue - Login</title>
+    <title>DocDialogue - Chat</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
 <header>
     <a href="index.html">
         <img src="assets/combined.png" alt="DocDialogue Logo">
     </a>
-    
     <nav>
         <ul>
+            <li><a href="login.html" class="login-button">Login</a></li>
             <li><a href="signup.html" class="signup-button">Sign Up</a></li>
         </ul>
     </nav>
 </header>
 
 <main>
-    <img src="assets/logo2.png" alt="Logo" id="popupLogo">
-    <div class="auth-form">
-        <h2>Login</h2>
-        <form action="#" method="post">
-            <div class="input-group">
-                <label for="username">Username</label>
-                <input type="text" name="username" id="username" required>
+    <div class="chat-container">
+        <div class="chat-header">
+            Chat with Dr. Bot
+        </div>
+
+        <div class="chat-box">
+            <div class="message bot">
+                Hello! How can I assist you today?
             </div>
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" required>
+            <!-- Example user message -->
+            <div class="message user">
+                I have a headache.
             </div>
-            <div class="input-group">
-                <button type="submit">Login</button>
-            </div>
-        </form>
+        </div>
+
+        <div class="chat-input">
+            <input type="text" placeholder="Type your message...">
+            <button>Send</button>
+        </div>
     </div>
 </main>
 

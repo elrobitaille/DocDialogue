@@ -18,7 +18,7 @@ header {
 nav {
     font-family: 'Libre Franklin', sans-serif;
     position: absolute;
-    top: 19px;
+    top: 15px;
     right: 20px;
 }
 
@@ -93,12 +93,16 @@ main {
 }
 
 #popupLogo {
-    max-width: 200px; 
-    margin-bottom: 20px;
     display: block;
+    max-width: 20%; 
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 20px; 
+    opacity: 0; 
+    transform: scale(0.5); 
+    animation: popup 1.5s forwards; 
 }
+
 
 @keyframes popup {
     0% {
@@ -201,4 +205,145 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: rgba(0, 0, 0, 0.8);
+}
+
+
+.decision-prompt {
+    text-align: center;
+    font-size: 32px;
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+.decision-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: calc(100vh - 150px); /* Adjusted for the header and prompt height */
+    margin-top: 50px;
+}
+
+.option {
+    text-align: center;
+}
+
+.option img {
+    width: 100px;
+    margin-bottom: 20px;
+}
+
+.decision-button {
+    display: block;
+    margin: 20px auto; /* Centers it horizontally and adds space above and below */
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    height: 500px; /* Adjusted height to make it taller */
+    border-radius: 30px; /* Increased for a more rounded look on taller boxes */
+    background-color: #f0f0f0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 150px; /* Makes the text vertically centered in the button */
+    transition: background-color 0.3s ease, transform 0.3s ease; 
+    text-align: center;
+}
+
+.decision-button span {
+    display: block;
+    margin-bottom: 5px; /* adjust as necessary for spacing */
+}
+
+.decision-button p {
+    font-size: 14px; /* adjust size as necessary */
+    margin: 0; /* to remove default margin of paragraph */
+    padding-top: 5px; /* adjust as necessary for spacing */
+}
+
+
+
+.text-chat:hover {
+    background-color: #99ddff; 
+    transform: scale(1.05); /* Adds a subtle zoom on hover */
+}
+
+.phone-call:hover {
+    background-color: #ffcc99; 
+    transform: scale(1.05); 
+}
+
+body {
+    font-family: 'Libre Franklin', sans-serif;
+    background-color: #f6f6f6;
+    margin: 0;
+    padding: 0;
+}
+
+.chat-container {
+    width: 80%;
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.chat-header {
+    background-color: #043da0;
+    color: white;
+    padding: 15px;
+    font-size: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.chat-box {
+    max-height: 400px;
+    overflow-y: scroll;
+    padding: 15px;
+}
+
+.message {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 20px;
+    width: fit-content;
+    clear: both;
+}
+
+.bot {
+    background-color: #e6e6e6;
+    float: left;
+}
+
+.user {
+    background-color: #043da0;
+    color: white;
+    float: right;
+}
+
+.chat-input {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #e6e6e6;
+    background-color: #fff;
+}
+
+.chat-input input {
+    flex-grow: 1;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #e6e6e6;
+}
+
+.chat-input button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    background-color: #043da0;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
 }
