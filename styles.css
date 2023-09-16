@@ -15,11 +15,6 @@ header {
     background-color: #e9ecef;
 }
 
-.banner {
-    width: 100%;
-    display: block;
-}
-
 nav {
     font-family: 'Libre Franklin', sans-serif;
     position: absolute;
@@ -67,7 +62,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 80px);  /* considering the header height */
+    height: calc(100vh - 80px);
 }
 
 .message-box {
