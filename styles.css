@@ -55,7 +55,7 @@ nav a:hover {
 }
 
 .login-button {
-    background-color: #043da0;
+    background-color: rgb(0,89,162);
     color: white;  /* Making the text white to contrast with the blue background */
 }
 
@@ -291,7 +291,7 @@ body {
 }
 
 .chat-header {
-    background-color: #043da0;
+    background-color: rgb(0,89,162);
     color: white;
     padding: 15px;
     font-size: 20px;
@@ -321,7 +321,7 @@ body {
 }
 
 .user {
-    background-color: #043da0;
+    background-color: rgb(0,89,162);
     color: white;
     float: right;
 }
@@ -345,9 +345,13 @@ body {
     width: 100px;
     margin-left: 10px;
     padding: 10px 20px;
-    background-color: #043da0;
+    background-color: rgb(0,89,162);
     color: white;
     border: none;
     border-radius: 20px;
     cursor: pointer;
+}
+
+.highlighted {
+    color: rgb(0,89,162) !important;
 }
