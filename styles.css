@@ -1,5 +1,6 @@
 body {
-    font-family: sans-serif;
+    font-family: 'Libre Franklin', sans-serif;
+    font-size: 10px;
     margin: 0;
     padding: 0;
     background-color: #f0f0f0; /* Gray background */
@@ -9,7 +10,7 @@ header {
     position: relative;
     width: 100%;
     height: 80px;
-    background-color: #5aa4f2; /* Blue top bar */
+    background-color: #e9ecef; /* Blue top bar */
 }
 
 .banner {
@@ -36,14 +37,14 @@ nav li {
 
 nav a {
     text-decoration: none;
-    color: white;  /* Changed text color to white for contrast against blue bar */
-    padding: 5px 15px;
+    color: rgb(0, 0, 0); 
+    padding: 50px 0px;
     transition: color 0.3s ease;
     font-weight: bold;
 }
 
 nav a:hover {
-    color: #f0f0f0;  /* Slight change on hover for a subtle effect */
+    color: #000000;  
 }
 
 nav a::after {
@@ -51,6 +52,12 @@ nav a::after {
     margin-left: 5px;
     display: inline-block;
     transform: scale(0.6);
+}
+
+nav ul li a {
+    font-family: 'Libre Franklin', sans-serif;
+    font-size: 18px; 
+    padding: 10px 20px;
 }
 
 article {
