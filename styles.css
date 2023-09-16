@@ -45,11 +45,36 @@ nav a:hover {
     color: #000000;  
 }
 
-nav a::after {
-    content: "▼";
-    margin-left: 5px;
+.login-button, .signup-button {
     display: inline-block;
-    transform: scale(0.6);
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 2px solid black;  /* To ensure both buttons have the same shape */
+}
+
+.login-button {
+    background-color: rgba(17, 98, 227, 0.811);
+    color: white;  /* Making the text white to contrast with the blue background */
+}
+
+.signup-button {
+    background-color: black;
+    color: white;
+    margin-left: 10px; /* To provide a little space between the buttons */
+}
+
+.login-button:hover {
+    background-color: rgba(22, 57, 185, 0.261);
+}
+
+.signup-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+nav a::after {
+    content: none;  /* Removes the ▼ symbol after the link text */
 }
 
 nav ul li a {
@@ -60,20 +85,54 @@ nav ul li a {
 
 main {
     display: flex;
+    flex-direction: column;  /* stack items vertically */
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 80px);
+    height: calc(100vh - 80px);  /* considering the header height */
+}
+
+#popupLogo {
+    display: block;
+    max-width: 20%; /* you can adjust this value as required */
+    margin-bottom: 20px; /* space below the image */
+    opacity: 0; /* start off invisible */
+    transform: scale(0.5); /* start off slightly scaled down */
+    animation: popup 1.5s forwards; /* 1.5s duration, only play once, and retain the end state */
+}
+
+#popupLogo {
+    max-width: 200px; /* Adjust as needed */
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@keyframes popup {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .message-box {
     padding: 15px 20px;
-    max-width: 10000px; 
+    width: 800px;
     font-size: 100px;
-    font-weight: bold; 
+    font-weight: bold;
     white-space: nowrap;
     overflow: hidden;
     border-right: 2px solid black; 
-    animation: typing 5s steps(100, end), blink 0.75s step-end infinite; 
+    animation: typing 5s steps(24, end) forwards, blink 0.75s step-end infinite 3s; 
+    margin-top: 0;
 }
 
 @keyframes typing {
@@ -81,12 +140,72 @@ main {
         width: 0;
     }
     to {
-        width: 100%;
+        width: 1600px; 
     }
 }
 
 @keyframes blink {
-    50% {
+    0%, 20%, 100% {
+        border-color: black;
+    }
+    10%, 30% {
         border-color: transparent;
     }
+}
+
+.signup-container {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.signup-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.signup-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"], input[type="password"], input[type="email"], input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 18px;
+}
+
+.form-container {
+    margin-top: 500px;  /* Adjust this value according to your needs */
+}
+
+label {
+    font-size: 20px; /* Increase font size of label */
+    margin-right: 10px;
+}
+input[type="submit"] {
+    cursor: pointer;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+input[type="submit"]:hover {
+    background-color: rgba(0, 0, 0, 0.8);
 }

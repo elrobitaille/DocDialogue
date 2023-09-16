@@ -13,18 +13,21 @@
 <body>
 
 <header>
+    <a href="index.html">
     <img src="assets/combined.png" alt="DocDialogue Logo">
+</a>
     <nav>
         <ul>
-            <li><a href="#" class="login-button">Login</a></li>
-            <li><a href="#" class="signup-button">Sign Up</a></li>
+            <li><a href="login.html" class="login-button">Login</a></li>
+            <li><a href="signup.html" class="signup-button">Sign Up</a></li>
         </ul>
     </nav>
 </header>
 
 <main>
     <div class="signup-container">
-        <h2>Sign Up</h2>
+        <h2></h2>
+        <img src="assets/logo2.png" alt="Logo" id="popupLogo">
         <form action="/submit_signup" method="post"> <!-- You can update action to your server-side logic -->
             <label for="name">Name:</label>
             <input type="text" id="name" name="user_name" required>
@@ -33,11 +36,11 @@
             <input type="email" id="email" name="user_email" required>
 
             <label for="phone">Phone:</label>
-            <input type="tel" id="phone" name="user_phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+            <input type="tel" id="phone" name="user_phone" required>
             <small>Format: 123-456-7890</small>
 
             <label for="password">Password:</label>
-            <input type="tel" id="password" name="user_pass" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+            <input type="tel" id="password" name="user_pass" pattern="123456" required>
             <small></small>
 
             <input type="submit" value="Sign Up">
