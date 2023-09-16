@@ -72,13 +72,13 @@ main {
 
 .message-box {
     padding: 15px 20px;
-    max-width: 300px; 
-    font-size: 24px; /* increased font size */
-    font-weight: bold; /* bold text */
+    max-width: 10000px; 
+    font-size: 100px;
+    font-weight: bold; 
     white-space: nowrap;
     overflow: hidden;
     border-right: 2px solid black; 
-    animation: typing 5s steps(50, end), blink 0.75s step-end infinite; 
+    animation: typing 5s steps(100, end), blink 0.75s step-end infinite; 
 }
 
 @keyframes typing {
