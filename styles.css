@@ -74,7 +74,7 @@ nav a:hover {
 }
 
 nav a::after {
-    content: none;  /* Removes the ▼ symbol after the link text */
+    content: none;  
 }
 
 nav ul li a {
@@ -85,23 +85,15 @@ nav ul li a {
 
 main {
     display: flex;
-    flex-direction: column;  /* stack items vertically */
+    flex-direction: column;  /* Stacks child elements vertically */
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 80px);  /* considering the header height */
+    height: calc(100vh - 80px);
+    text-align: center;
 }
 
 #popupLogo {
-    display: block;
-    max-width: 20%; /* you can adjust this value as required */
-    margin-bottom: 20px; /* space below the image */
-    opacity: 0; /* start off invisible */
-    transform: scale(0.5); /* start off slightly scaled down */
-    animation: popup 1.5s forwards; /* 1.5s duration, only play once, and retain the end state */
-}
-
-#popupLogo {
-    max-width: 200px; /* Adjust as needed */
+    max-width: 200px; 
     margin-bottom: 20px;
     display: block;
     margin-left: auto;
@@ -125,15 +117,16 @@ main {
 
 .message-box {
     padding: 15px 20px;
-    width: 800px;
+    width: fit-content;
     font-size: 100px;
     font-weight: bold;
     white-space: nowrap;
     overflow: hidden;
     border-right: 2px solid black; 
-    animation: typing 5s steps(24, end) forwards, blink 0.75s step-end infinite 3s; 
-    margin-top: 0;
+    animation: typing 5s steps(24, end) forwards, blink 0.75s step-end infinite 5s; 
+    margin: auto;
 }
+
 
 @keyframes typing {
     from {
