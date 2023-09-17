@@ -46,14 +46,40 @@
             <button class="calendar-button">
                 <img src="assets/notif.png" alt="notifications" width="30px" height="30px" alt="Send" id="send-img">
             </button>
+            <button class="record-button">
+                <img src="assets/rec.png" alt="rec" width="30px" height="30px" alt="Send" id="send-img">
+            </button>
             <div class="loader"></div>
         </form>
-
         </div>
         <div class="chat-input">
         </div>
     </div>
-     <!-- javascript -->
+    <script> 
+    document.addEventListener("DOMContentLoaded", function() {
+    // Grab elements
+    const recordButton = document.querySelector(".record-button");
+    const overlayImage = document.createElement("img");
+
+    // Set up the overlay image
+    overlayImage.src = "assets/rec.png";
+    overlayImage.width = 30;
+    overlayImage.height = 30;
+    overlayImage.className = "overlay-image";
+    document.body.appendChild(overlayImage);
+
+    // Toggle overlay image visibility
+    recordButton.addEventListener("click", function() {
+        if (overlayImage.style.display === "none" || overlayImage.style.display === "") {
+            overlayImage.style.display = "block";
+        } else {
+            overlayImage.style.display = "none";
+        }
+    });
+});
+
+    </script>
+     
      <script src="index.js" ></script>
 </main>
 

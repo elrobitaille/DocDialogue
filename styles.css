@@ -433,3 +433,26 @@ body {
     height: auto;
     padding: 5px 10px;
 }
+
+.calendar-button {
+    vertical-align: middle; /* Adjust the vertical alignment as needed */
+    margin-top: -30px;
+}
+
+.record-button {
+    vertical-align: middle; /* Adjust the vertical alignment as needed */
+    margin-top: -30px;
+}
+
+
+body {
+    position: relative; /* This makes sure the body can be the reference for fixed positioning of its children */
+}
+
+.overlay-image {
+    display: none; /* Initially hidden */
+    position: fixed; /* Use fixed positioning */
+    top: 10px; /* 10px from the top of the viewport */
+    right: 10px; /* 10px from the right of the viewport */
+    z-index: 9999; /* A high value to ensure the image is on top of other elements */
+}
