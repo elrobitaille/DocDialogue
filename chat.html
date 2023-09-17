@@ -28,22 +28,26 @@
         <div class="chat-header">
             Chat with Dr. Bot
         </div>
-
-        <div class="chat-box">
-            <div class="message bot">
-                Hello! How can I assist you today?
-            </div>
-            <!-- Example user message -->
-            <div class="message user">
-                I have a headache.
-            </div>
+        <div class="container messages">
+            <!-- Chat messages will be added here -->
         </div>
+    
+        <form class="chat-form" id="chat-form">
+            <input type="text" class="chat-input" id="chat-input" placeholder="Ask me...">
+            <button type="submit" class="chat-send" id="chat-send">
+                <img src="dog.png" width="20px" height="20px" alt="Send" id="send-img">
+            </button>
+            <div class="loader"></div>
+        </form>
 
+        </div>
         <div class="chat-input">
             <input type="text" placeholder="Type your message...">
             <button>Send</button>
         </div>
     </div>
+     <!-- javascript -->
+     <script src="index.js"></script>
 </main>
 
 </body>
