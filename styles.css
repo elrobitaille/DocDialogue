@@ -359,6 +359,7 @@ body {
 
 .highlighted {
     color: rgb(0,89,162) !important;
+
 }
 
 .chatbubble {
@@ -464,4 +465,5 @@ body {
     z-index: 1000;
     background-color: #fff;
     display: none;
+
 }
