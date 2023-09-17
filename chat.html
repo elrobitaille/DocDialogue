@@ -40,16 +40,127 @@
             <button type="submit" class="chat-send" id="chat-send">
                 <img src="assets/send.png" width="80px" height="45px" alt="Send" id="send-img">
             </button>
+            <button class="calendar-button" onclick="toggleCalendarDropdown()">
+                <img src="assets/calendar.png" alt="Calendar" width="30px" height="30px">
+            </button>
+            <button class="calendar-button">
+                <img src="assets/notif.png" alt="notifications" width="30px" height="30px" alt="Send" id="send-img">
+            </button>
+            <button class="record-button">
+                <img src="assets/rec.png" alt="rec" width="30px" height="30px" alt="Send" id="send-img">
+            </button>
+
+            <!-- Dropdown form hidden by default -->
+<div class="calendar-dropdown" style="display:none;">
+    <select id="month">
+        <!-- You can loop these values server-side or use JS to populate -->
+        <option value="01">January</option>
+        <option value="02">February</option>
+        <option value="03">March</option>
+        <option value="04">April</option>
+        <option value="05">May</option>
+        <option value="06">June</option>
+        <option value="07">July</option>
+        <option value="08">August</option>
+        <option value="09">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+    </select>
+
+    <select id="day">
+        <!-- Days 01 to 31, again, better to populate with JS -->
+        <option value="01">1</option>
+        <option value="02">2</option>
+        <option value="03">3</option>
+        <option value="04">4</option>
+        <option value="05">5</option>
+        <option value="06">6</option>
+        <option value="07">7</option>
+        <option value="08">8</option>
+        <option value="09">9</option>
+        <option value="10">10</option>
+        
+    </select>
+
+    <select id="year">
+        <!-- Some sample years, adjust as needed -->
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+        <option value="2024">2025</option>
+        <!-- ... -->
+    </select>
+
+    <select id="time">
+        <!-- Times in 24h format, every hour as an example -->
+        <option value="00:00">00:00</option>
+        <option value="01:00">01:00</option>
+        <!-- ... -->
+        <option value="23:00">23:00</option>
+    </select>
+    
+    <button onclick="scheduleEvent()">Schedule</button>
+</div>
+
             <div class="loader"></div>
         </form>
-
         </div>
         <div class="chat-input">
         </div>
     </div>
-     <!-- javascript -->
-     <script src="index.js"></script>
-     <script src="app.js"></script>
+    <script> 
+    document.addEventListener("DOMContentLoaded", function() {
+    // Grab elements
+    const recordButton = document.querySelector(".record-button");
+    const overlayImage = document.createElement("img");
+
+    // Set up the overlay image
+    overlayImage.src = "assets/rec.png";
+    overlayImage.width = 30;
+    overlayImage.height = 30;
+    overlayImage.className = "overlay-image";
+    document.body.appendChild(overlayImage);
+
+    // Toggle overlay image visibility
+    recordButton.addEventListener("click", function() {
+        if (overlayImage.style.display === "none" || overlayImage.style.display === "") {
+            overlayImage.style.display = "block";
+        } else {
+            overlayImage.style.display = "none";
+        }
+    });
+});
+
+function toggleCalendarDropdown() {
+    const dropdown = document.querySelector(".calendar-dropdown");
+    if (dropdown.style.display === "none" || dropdown.style.display === "") {
+        dropdown.style.display = "block";
+    } else {
+        dropdown.style.display = "none";
+    }
+}
+
+function scheduleEvent() {
+    const month = document.getElementById("month").value;
+    const day = document.getElementById("day").value;
+    const year = document.getElementById("year").value;
+    const time = document.getElementById("time").value;
+
+    // Logic to call Google Calendar API with the selected values
+    // Use the startGoogleCalendar function you have with some modifications to receive dateInfo as parameter
+
+    const dateInfo = {
+        month: month, 
+        day: day,
+        time: time
+    };
+    
+}
+
+
+    </script>
+     
+     <script src="index.js" ></script>
 </main>
 
 </body>
