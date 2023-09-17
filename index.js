@@ -32,7 +32,7 @@ function addMessage(message, isUser) {
 function handleUserInput(event) {
     event.preventDefault();
     const message = chatInput.value.trim();
-    INSTRUCTIONS = "Roleplay as a doctor answering a patient's questions who doesn't understand complicated medical terminology"
+    INSTRUCTIONS = "Roleplay as a doctor answering a patient's questions who doesn't understand complicated medical terminology. You are the doctor, not the patient. Respond to my questions accordingly."
     if (message !== '') {
         messages.push({
             'role': 'user',
