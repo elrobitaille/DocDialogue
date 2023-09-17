@@ -410,3 +410,26 @@ body {
     top: 5px;
     left: -10px;
 }
+
+.microphone-button {
+    border: none;
+    background: none;
+    padding: 0;
+    margin-left: 10px;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%); /* This will vertically center the button */
+}
+
+.microphone-button img {
+    width: 20px; /* Adjust the size of the microphone icon if needed */
+    height: auto;
+}
+
+/* Adjust the Send button to not cover the entire height, and to make space for the microphone button */
+.chat-input button {
+    height: auto;
+    padding: 5px 10px;
+}
