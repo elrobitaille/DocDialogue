@@ -1,4 +1,4 @@
-![Logo](images/logo.png)
+![Logo](assets/logo2.png)
 
 ### Inspiration
 
