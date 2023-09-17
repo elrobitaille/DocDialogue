@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;900&display=swap" rel="stylesheet">
     <title>DocDialogue - Chat</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 
 <body>
@@ -93,10 +94,12 @@
 
     <select id="time">
         <!-- Times in 24h format, every hour as an example -->
-        <option value="00:00">00:00</option>
-        <option value="01:00">01:00</option>
+        <option value="08:00">08:00</option>
+        <option value="09:00">09:00</option>
+        <option value="10:00">10:00</option>
+        <option value="11:00">11:00</option>
+        <option value="12:00">12:00</option>
         <!-- ... -->
-        <option value="23:00">23:00</option>
     </select>
     
     <button onclick="scheduleEvent()">Schedule</button>
@@ -108,7 +111,9 @@
         <div class="chat-input">
         </div>
     </div>
+    
     <script> 
+    
     document.addEventListener("DOMContentLoaded", function() {
     // Grab elements
     const recordButton = document.querySelector(".record-button");
@@ -155,6 +160,50 @@ function scheduleEvent() {
         time: time
     };
     
+}
+
+function init() {
+        gapi.client.setApiKey('AIzaSyDyPrQz4_vogabKuLybXuzWJaL0ZX1doP4'); // Replace with your API key
+        gapi.client.load('calendar', 'v3', () => console.log("Loaded calendar"));
+    }
+
+    function authenticate() {
+        return gapi.auth2.getAuthInstance()
+            .signIn({ scope: "https://www.googleapis.com/auth/calendar.events" })
+            .then(() => console.log("Sign-in successful"),
+                err => console.error("Error signing in", err));
+    }
+
+    function scheduleEvent() {
+    const month = document.getElementById("month").value;
+    const day = document.getElementById("day").value;
+    const year = document.getElementById("year").value;
+    const time = document.getElementById("time").value;
+
+    const eventDateTime = new Date(`${year}-${month}-${day}T${time}:00.000Z`);
+
+    const calendarEvent = {
+        summary: "Scheduled Event",
+        location: '',  // If you have a location, input here
+        description: '', // Any description or notes
+        start: {
+            dateTime: eventDateTime.toISOString(),
+            timeZone: 'UTC' // You might want to adjust this to your desired timezone
+        },
+        end: {
+            dateTime: new Date(eventDateTime.getTime() + (1 * 60 * 60 * 1000)).toISOString(), // 1 hour after the start time
+            timeZone: 'UTC' // Adjust timezone if needed
+        }
+    };
+
+    // Call the Google Calendar API to create the event
+    gapi.client.calendar.events.insert({
+        'calendarId': 'primary', // This schedules the event in the user's primary calendar. Adjust if necessary.
+        'resource': calendarEvent
+    }).then(response => {
+        console.log("Event created:", response);
+        window.open(response.result.htmlLink); // This opens the created event in Google Calendar
+    });
 }
 
 

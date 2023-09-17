@@ -7,15 +7,92 @@ const sendImg = document.querySelector('#send-img');
 const loader = document.querySelector('.loader');
 
 // OpenAI API
-const OPENAI_MODEL = 'gpt-3.5-turbo'; // gpt-3.5-turbo, gpt-3.5-turbo-0301
+const OPENAI_MODEL = 'gpt-3.5-turbo'; 
 const OPENAI_URL = 'https://api.openai.com/v1/chat/completions';
-// Input Your OpenAI API Key Here. 
-// You can sign up and get API Key from here 
-// https://platform.openai.com/account/api-keys
 let apiKey = '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';
-const messages = []; // store previous messages to remember whole conversation
+const messages = [];
 
-// Function to add a chat message to the container
+// Google Calendar
+async function initializeGoogleApi() {
+    try {
+        await gapi.load('client:auth2');
+        await gapi.client.init({
+            apiKey: "AIzaSyDyPrQz4_vogabKuLybXuzWJaL0ZX1doP4",
+            clientId: "260877479525-i312eu1r4c0kc2n92r6rp9de5flkp99q.apps.googleusercontent.com",
+            discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
+            scope: "https://www.googleapis.com/auth/calendar.events"
+        });
+        console.log("Google API client loaded.");
+    } catch (error) {
+        console.error("Error loading Google API client", error);
+    }
+}
+
+function authenticateGoogleApi() {
+    return new Promise((resolve, reject) => {
+        const authInstance = gapi.auth2.getAuthInstance();
+        if (!authInstance) {
+            reject(new Error("Google Auth instance not initialized"));
+            return;
+        }
+        authInstance.signIn().then(resolve, error => {
+            console.error("Detailed Google Auth signIn error:", error);
+            reject(new Error(`Authentication failed: ${error ? error.error : 'unknown error'}`));
+        });
+    });
+}
+
+function createGoogleCalendarEvent(dateInfo) {
+    return new Promise((resolve, reject) => {
+        const event = {
+            'summary': 'Scheduled Appointment',
+            'start': {
+                'dateTime': `${dateInfo.year}-${dateInfo.month}-${dateInfo.day}T${dateInfo.time}:00`, 
+                'timeZone': 'America/Los_Angeles'
+            },
+            'end': {
+                'dateTime': `${dateInfo.year}-${dateInfo.month}-${dateInfo.day}T${(parseInt(dateInfo.time.split(':')[0]) + 1).toString().padStart(2, '0')}:00`, 
+                'timeZone': 'America/Los_Angeles'
+            },
+        };
+
+        var request = gapi.client.calendar.events.insert({
+            'calendarId': 'primary',
+            'resource': event
+        });
+
+        request.execute(function(event) {
+            resolve(event);
+            window.open(event.htmlLink);
+        }, function(error) {
+            console.error("Error creating event on Google Calendar", error);
+            reject(error);
+        });
+    });
+}
+
+async function scheduleEvent() {
+    const month = document.getElementById("month").value;
+    const day = document.getElementById("day").value;
+    const year = document.getElementById("year").value;
+    const time = document.getElementById("time").value;
+
+    const dateInfo = {
+        month: month, 
+        day: day,
+        year: year,
+        time: time
+    };
+
+    try {
+        await initializeGoogleApi();
+        await authenticateGoogleApi();
+        await createGoogleCalendarEvent(dateInfo);
+    } catch (error) {
+        console.error("There was an error scheduling the event:", error);
+    }
+}
+
 function addMessage(message, isUser) {
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message');
@@ -27,12 +104,11 @@ function addMessage(message, isUser) {
     messageContainer.scrollTop = messageContainer.scrollHeight;
 }
 
-
-// Function to handle user input
 function handleUserInput(event) {
     event.preventDefault();
     const message = chatInput.value.trim();
-    INSTRUCTIONS = "Roleplay as a doctor answering a patient's questions who doesn't understand complicated medical terminology. You are the doctor, not the patient. Respond to my questions accordingly. Be empathetic and nice to the patients. You are doctor GPT, a friendly neighborhood doctor who's goal is to understand the patient's situation and issues and are a safe space for the patient. Refer to yourself as Doctor GPT. Don't include Doctor: or anything of the sort in your conversations. This is a medical convo roleplay. When the conversation starts, be inquisitive about their situation."
+    const INSTRUCTIONS = "Roleplay as a doctor..."; // [Keep your instructions here]
+    
     if (message !== '') {
         messages.push({
             'role': 'user',
@@ -41,7 +117,7 @@ function handleUserInput(event) {
         addMessage(message, true);
         chatInput.value = '';
         showLoader();
-        // Other request body from here https://platform.openai.com/docs/api-reference/chat/create
+
         fetch(OPENAI_URL, {
             method: 'POST',
             headers: {
@@ -67,43 +143,26 @@ function handleUserInput(event) {
     }
 }
 
-function addMessage(text, isUser) {
-    const chatbubbleDiv = document.createElement('div');
-    const chatbubbleContent = document.createElement('p'); 
-
-    chatbubbleDiv.classList.add('chatbubble');
-    chatbubbleDiv.classList.add(isUser ? 'user-message' : 'bot-message');
-
-    chatbubbleContent.textContent = text;
-    chatbubbleDiv.appendChild(chatbubbleContent);
-    messageContainer.appendChild(chatbubbleDiv);
-
-    // Scroll to the bottom of the chat container
-    messageContainer.scrollTop = messageContainer.scrollHeight;
-}
-
-
-
-// Function to show the loader icon
 function showLoader() {
     loader.style.display = 'inline-block';
     chatSend.disabled = true;
 }
 
-// Function to hide the loader icon
 function hideLoader() {
     loader.style.display = 'none';
     chatSend.disabled = false;
 }
 
-// Ask user to input his/her API Key
 function checkAPIKey() {
     if (!apiKey) apiKey = prompt('Please input OpenAI API Key.');
     if (!apiKey) alert('You have not entered the API Key. The application will not work.');
 }
+
+initializeGoogleApi();
 
 // Add an event listener to the form
 chatForm.addEventListener('submit', handleUserInput);
 
 // check
 checkAPIKey();
+
