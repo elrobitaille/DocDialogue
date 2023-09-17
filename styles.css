@@ -362,6 +362,7 @@ body {
     border-radius: 20px;
     max-width: 60%;
     word-wrap: break-word;
+    clear: both;  /* This will ensure that each chat bubble is below the previous one */
 }
 
 .user-message {
