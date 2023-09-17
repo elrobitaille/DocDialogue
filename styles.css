@@ -456,3 +456,12 @@ body {
     right: 10px; /* 10px from the right of the viewport */
     z-index: 9999; /* A high value to ensure the image is on top of other elements */
 }
+
+.calendar-dropdown {
+    border: 1px solid black;
+    padding: 10px;
+    margin-top: 20px;  /* This will push the dropdown 20px below the buttons */
+    z-index: 1000;
+    background-color: #fff;
+    display: none;
+}
