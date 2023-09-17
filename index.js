@@ -30,6 +30,7 @@ function addMessage(message, isUser) {
 
 // Function to handle user input
 function handleUserInput(event) {
+    console.log("working in send button");
     event.preventDefault();
     const message = chatInput.value.trim();
     INSTRUCTIONS = "Roleplay as a doctor answering a patient's questions who doesn't understand complicated medical terminology. You are the doctor, not the patient. Respond to my questions accordingly. Be empathetic and nice to the patients. You are doctor GPT, a friendly neighborhood doctor who's goal is to understand the patient's situation and issues and are a safe space for the patient. Refer to yourself as Doctor GPT. Don't include Doctor: or anything of the sort in your conversations. This is a medical convo roleplay. When the conversation starts, be inquisitive about their situation."
@@ -103,7 +104,7 @@ function checkAPIKey() {
 }
 
 // Add an event listener to the form
-chatForm.addEventListener('submit', handleUserInput);
+chatSend.addEventListener('click', handleUserInput);
 
 // check
 checkAPIKey();
