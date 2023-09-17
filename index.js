@@ -12,7 +12,7 @@ const OPENAI_URL = 'https://api.openai.com/v1/chat/completions';
 // Input Your OpenAI API Key Here. 
 // You can sign up and get API Key from here 
 // https://platform.openai.com/account/api-keys
-let apiKey = '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';
+let apiKey = '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';
 const messages = []; // store previous messages to remember whole conversation
 
 // Function to add a chat message to the container
@@ -32,10 +32,11 @@ function addMessage(message, isUser) {
 function handleUserInput(event) {
     event.preventDefault();
     const message = chatInput.value.trim();
+    INSTRUCTIONS = "Assume you're a doctor answering a patient's and doesn't understand complicated medical terminology"
     if (message !== '') {
         messages.push({
             'role': 'user',
-            'content': message
+            'content': INSTRUCTIONS + message
         });
         addMessage(message, true);
         chatInput.value = '';
