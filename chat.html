@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;900&display=swap" rel="stylesheet">
     <title>DocDialogue - Chat</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://apis.google.com/js/api.js"></script>
 </head>
 
 <body>
@@ -28,23 +29,193 @@
         <div class="chat-header">
             Chat with Dr. Bot
         </div>
-
-        <div class="chat-box">
-            <div class="message bot">
-                Hello! How can I assist you today?
-            </div>
-            <!-- Example user message -->
-            <div class="message user">
-                I have a headache.
-            </div>
+        <div class="container messages">
+            <!-- Chat messages will be added here -->
         </div>
+    
+        <form class="chat-form" id="chat-form">
+            <input type="text" class="chat-input" id="chat-input" placeholder="Send Message to the Doctor...">
+            <button class="microphone-button">
+                <img src="assets/microphone.png" alt="Microphone">
+            </button>
+            <button type="submit" class="chat-send" id="chat-send">
+                <img src="assets/send.png" width="80px" height="45px" alt="Send" id="send-img">
+            </button>
+            <button class="calendar-button" onclick="toggleCalendarDropdown()">
+                <img src="assets/calendar.png" alt="Calendar" width="30px" height="30px">
+            </button>
+            <button class="calendar-button">
+                <img src="assets/notif.png" alt="notifications" width="30px" height="30px" alt="Send" id="send-img">
+            </button>
+            <button class="record-button">
+                <img src="assets/rec.png" alt="rec" width="30px" height="30px" alt="Send" id="send-img">
+            </button>
 
+            <!-- Dropdown form hidden by default -->
+<div class="calendar-dropdown" style="display:none;">
+    <select id="month">
+        <!-- You can loop these values server-side or use JS to populate -->
+        <option value="01">January</option>
+        <option value="02">February</option>
+        <option value="03">March</option>
+        <option value="04">April</option>
+        <option value="05">May</option>
+        <option value="06">June</option>
+        <option value="07">July</option>
+        <option value="08">August</option>
+        <option value="09">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+    </select>
+
+    <select id="day">
+        <!-- Days 01 to 31, again, better to populate with JS -->
+        <option value="01">1</option>
+        <option value="02">2</option>
+        <option value="03">3</option>
+        <option value="04">4</option>
+        <option value="05">5</option>
+        <option value="06">6</option>
+        <option value="07">7</option>
+        <option value="08">8</option>
+        <option value="09">9</option>
+        <option value="10">10</option>
+        
+    </select>
+
+    <select id="year">
+        <!-- Some sample years, adjust as needed -->
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+        <option value="2024">2025</option>
+        <!-- ... -->
+    </select>
+
+    <select id="time">
+        <!-- Times in 24h format, every hour as an example -->
+        <option value="08:00">08:00</option>
+        <option value="09:00">09:00</option>
+        <option value="10:00">10:00</option>
+        <option value="11:00">11:00</option>
+        <option value="12:00">12:00</option>
+        <!-- ... -->
+
+    </select>
+    
+    <button onclick="scheduleEvent()">Schedule</button>
+</div>
+
+            <div class="loader"></div>
+        </form>
+        </div>
         <div class="chat-input">
-            <input type="text" placeholder="Type your message...">
-            <button>Send</button>
         </div>
     </div>
+    
+    <script> 
+    
+    document.addEventListener("DOMContentLoaded", function() {
+    // Grab elements
+    const recordButton = document.querySelector(".record-button");
+    const overlayImage = document.createElement("img");
+
+    // Set up the overlay image
+    overlayImage.src = "assets/rec.png";
+    overlayImage.width = 30;
+    overlayImage.height = 30;
+    overlayImage.className = "overlay-image";
+    document.body.appendChild(overlayImage);
+
+    // Toggle overlay image visibility
+    recordButton.addEventListener("click", function() {
+        if (overlayImage.style.display === "none" || overlayImage.style.display === "") {
+            overlayImage.style.display = "block";
+        } else {
+            overlayImage.style.display = "none";
+        }
+    });
+});
+
+function toggleCalendarDropdown() {
+    const dropdown = document.querySelector(".calendar-dropdown");
+    if (dropdown.style.display === "none" || dropdown.style.display === "") {
+        dropdown.style.display = "block";
+    } else {
+        dropdown.style.display = "none";
+    }
+}
+
+function scheduleEvent() {
+    const month = document.getElementById("month").value;
+    const day = document.getElementById("day").value;
+    const year = document.getElementById("year").value;
+    const time = document.getElementById("time").value;
+
+    // Logic to call Google Calendar API with the selected values
+    // Use the startGoogleCalendar function you have with some modifications to receive dateInfo as parameter
+
+    const dateInfo = {
+        month: month, 
+        day: day,
+        time: time
+    };
+    
+}
+
+function init() {
+        gapi.client.setApiKey('AIzaSyDyPrQz4_vogabKuLybXuzWJaL0ZX1doP4'); // Replace with your API key
+        gapi.client.load('calendar', 'v3', () => console.log("Loaded calendar"));
+    }
+
+    function authenticate() {
+        return gapi.auth2.getAuthInstance()
+            .signIn({ scope: "https://www.googleapis.com/auth/calendar.events" })
+            .then(() => console.log("Sign-in successful"),
+                err => console.error("Error signing in", err));
+    }
+
+    function scheduleEvent() {
+    const month = document.getElementById("month").value;
+    const day = document.getElementById("day").value;
+    const year = document.getElementById("year").value;
+    const time = document.getElementById("time").value;
+
+    const eventDateTime = new Date(`${year}-${month}-${day}T${time}:00.000Z`);
+
+    const calendarEvent = {
+        summary: "Scheduled Event",
+        location: '',  // If you have a location, input here
+        description: '', // Any description or notes
+        start: {
+            dateTime: eventDateTime.toISOString(),
+            timeZone: 'UTC' // You might want to adjust this to your desired timezone
+        },
+        end: {
+            dateTime: new Date(eventDateTime.getTime() + (1 * 60 * 60 * 1000)).toISOString(), // 1 hour after the start time
+            timeZone: 'UTC' // Adjust timezone if needed
+        }
+    };
+
+    // Call the Google Calendar API to create the event
+    gapi.client.calendar.events.insert({
+        'calendarId': 'primary', // This schedules the event in the user's primary calendar. Adjust if necessary.
+        'resource': calendarEvent
+    }).then(response => {
+        console.log("Event created:", response);
+        window.open(response.result.htmlLink); // This opens the created event in Google Calendar
+    });
+}
+
+
+    </script>
+     
+     <script src="index.js" ></script>
 </main>
 
 </body>
 </html>
+
+
+
+

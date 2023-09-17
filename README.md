@@ -1,0 +1,30 @@
+![Logo](images/logo.png)
+
+### Inspiration
+
+Our inspiration taps into very real issues that many patients face. Social anxiety and discrimination can create significant barriers to effective healthcare. By focusing on these aspects, we are aiming to democratize the patient-doctor interaction and make it more comfortable for all involved. We have personally felt some of these affects in the past, and working on a tool to solve this was an amazing opportunity. 
+
+### What it does
+
+Our platform goes beyond just text-based interactions by offering simulated vocal conversations. This added feature could enhance the experience and make the simulation more realistic, better preparing patients for their real-world appointments. The responses are based on guidelines, laws, and information that doctors have access to. These conversations are also utilized to help healthcare providers better understand their patients based on insights gathered from interactions. 
+
+### How we built it
+
+Our choice of technologies combines ChatGPT for conversation, Pinecone to build a vector data-base of vital information regarding the medical field, and google cloud to access patients’ calendars to extend communication and set reminders. These tools are then embedded on the website for a concise experience for the user. 
+
+### Challenges we ran into
+
+Our challenges are par for the course when working with cutting-edge AI, LLM, and ML technology, especially in a sensitive area like healthcare. The issue of AI hallucinations is particularly critical here, as incorrect or misleading medical advice could have serious repercussions. To solve this we created a vector database with Pinecone so that answers only contain relevant and correct information without overstepping its role according to legal statutes. 
+
+### Accomplishments that we're proud of
+
+Ease of use and accessibility are key factors in healthcare technology. Our focus on responsible communication and compliance with medical and legal guidelines adds a layer of reliability to our platform.
+
+### What we learned
+
+The learning curve for creating a virtual environment for voice cloning and machine learning is steep, but mastering it opens up vast possibilities for our project. Learning how to mitigate the AI hallucination problem is also a valuable lesson that has applications beyond just this project.
+
+### What's next for DocDialogue
+
+Expanding our data set will not only improve the accuracy of our machine learning model but will also make our platform more inclusive. Different accents, dialects, and idioms can all be incorporated to make the simulated conversations even more realistic, informative, and comforting. Given the architecture, there is also room integrate more tools for analysis or functionalities 
+
