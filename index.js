@@ -28,18 +28,12 @@ async function initializeGoogleApi() {
     }
 }
 
-function authenticateGoogleApi() {
-    return new Promise((resolve, reject) => {
-        const authInstance = gapi.auth2.getAuthInstance();
-        if (!authInstance) {
-            reject(new Error("Google Auth instance not initialized"));
-            return;
-        }
-        authInstance.signIn().then(resolve, error => {
-            console.error("Detailed Google Auth signIn error:", error);
-            reject(new Error(`Authentication failed: ${error ? error.error : 'unknown error'}`));
-        });
-    });
+async function authenticateGoogleApi() {
+    try {
+        await gapi.auth2.getAuthInstance().signIn();
+    } catch (error) {
+        throw new Error('Authentication failed: ' + error.message);
+    }
 }
 
 function createGoogleCalendarEvent(dateInfo) {
@@ -105,7 +99,6 @@ function addMessage(message, isUser) {
 }
 
 function handleUserInput(event) {
-    console.log("working in send button");
     event.preventDefault();
     const message = chatInput.value.trim();
     const INSTRUCTIONS = "Roleplay as a doctor..."; // [Keep your instructions here]
@@ -162,7 +155,7 @@ function checkAPIKey() {
 initializeGoogleApi();
 
 // Add an event listener to the form
-chatSend.addEventListener('click', handleUserInput);
+chatForm.addEventListener('submit', handleUserInput);
 
 // check
 checkAPIKey();
