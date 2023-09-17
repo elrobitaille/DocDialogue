@@ -12,7 +12,7 @@ const OPENAI_URL = 'https://api.openai.com/v1/chat/completions';
 // Input Your OpenAI API Key Here. 
 // You can sign up and get API Key from here 
 // https://platform.openai.com/account/api-keys
-let apiKey = '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';
+let apiKey = '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';
 const messages = []; // store previous messages to remember whole conversation
 
 // Function to add a chat message to the container
