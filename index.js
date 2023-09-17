@@ -105,6 +105,7 @@ function addMessage(message, isUser) {
 }
 
 function handleUserInput(event) {
+    console.log("working in send button");
     event.preventDefault();
     const message = chatInput.value.trim();
     const INSTRUCTIONS = "Roleplay as a doctor..."; // [Keep your instructions here]
@@ -161,7 +162,7 @@ function checkAPIKey() {
 initializeGoogleApi();
 
 // Add an event listener to the form
-chatForm.addEventListener('submit', handleUserInput);
+chatSend.addEventListener('click', handleUserInput);
 
 // check
 checkAPIKey();
