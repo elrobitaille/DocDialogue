@@ -300,8 +300,8 @@ body {
 }
 
 .chat-box {
-    height: 500px;
-    max-height: 1500px;
+    height: 1500px !important;
+    max-height: 10000px;
     overflow-y: scroll;
     padding: 15px;
 }
@@ -357,20 +357,36 @@ body {
 }
 
 .chatbubble {
-    padding: 10px;
+    padding: 15px 25px; /* Increased padding for bigger bubbles */
     margin: 10px;
-    border-radius: 20px;
+    border-radius: 25px; /* Slightly bigger radius for rounder edges */
     max-width: 60%;
     word-wrap: break-word;
-    clear: both;  /* This will ensure that each chat bubble is below the previous one */
+    position: relative;
+    clear: both;
+    font-size: 1.5rem; /* Increased font size */
 }
 
+/* For the user message (on the right side) */
 .user-message {
     background-color: #e6e6e6;
     float: right;
     margin-left: 40%;
 }
 
+.user-message::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent #e6e6e6 transparent transparent;
+    bottom: 0;
+    right: -10px;
+}
+
+/* For the bot message (on the left side) */
 .bot-message {
     background-color: #007BFF;
     color: white;
@@ -378,9 +394,14 @@ body {
     margin-right: 40%;
 }
 
-/* Add clear after each chatbubble to ensure proper floating */
-.chatbubble::after {
+.bot-message::after {
     content: "";
-    display: table;
-    clear: both;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 0 10px 10px;
+    border-color: transparent transparent transparent #007BFF;
+    top: 5px;
+    left: -10px;
 }
