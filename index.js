@@ -67,6 +67,22 @@ function handleUserInput(event) {
     }
 }
 
+function addMessage(text, isUser) {
+    const chatbubbleDiv = document.createElement('div');
+    const chatbubbleContent = document.createElement('p'); 
+
+    chatbubbleDiv.classList.add('chatbubble');
+    chatbubbleDiv.classList.add(isUser ? 'user-message' : 'bot-message');
+
+    chatbubbleContent.textContent = text;
+    chatbubbleDiv.appendChild(chatbubbleContent);
+    messageContainer.appendChild(chatbubbleDiv);
+
+    // Scroll to the bottom of the chat container
+    messageContainer.scrollTop = messageContainer.scrollHeight;
+}
+
+
 
 // Function to show the loader icon
 function showLoader() {

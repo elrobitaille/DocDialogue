@@ -355,3 +355,31 @@ body {
 .highlighted {
     color: rgb(0,89,162) !important;
 }
+
+.chatbubble {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 20px;
+    max-width: 60%;
+    word-wrap: break-word;
+}
+
+.user-message {
+    background-color: #e6e6e6;
+    float: right;
+    margin-left: 40%;
+}
+
+.bot-message {
+    background-color: #007BFF;
+    color: white;
+    float: left;
+    margin-right: 40%;
+}
+
+/* Add clear after each chatbubble to ensure proper floating */
+.chatbubble::after {
+    content: "";
+    display: table;
+    clear: both;
+}
